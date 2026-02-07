@@ -1,6 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { db } from './_lib/db';
 import { products, users, activityLogs } from '../shared/schema';
 import { eq, desc, count, sql } from 'drizzle-orm';
@@ -32,6 +34,7 @@ app.use(session({
 const allowedOrigins = [
     'http://localhost:5000',
     `https://${process.env.REPLIT_DEV_DOMAIN}`,
+    'https://impero-golds.replit.app',
 ].filter(Boolean);
 
 app.use((req, res, next) => {
@@ -313,14 +316,24 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Export for Vercel
-export default app;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`🚀 API Server running on http://localhost:${PORT}`);
-        console.log(`📊 Gold Rates: http://localhost:${PORT}/api/gold-rates`);
-        console.log(`🛍️  Products: http://localhost:${PORT}/api/products`);
-        console.log(`🔐 Auth: http://localhost:${PORT}/api/auth/*`);
+if (isProduction) {
+    const distPath = path.resolve(__dirname, '..', 'dist');
+    app.use(express.static(distPath));
+    app.get('*', (req, res) => {
+        if (!req.path.startsWith('/api')) {
+            res.sendFile(path.join(distPath, 'index.html'));
+        }
     });
 }
+
+const LISTEN_PORT = isProduction ? 5000 : PORT;
+
+app.listen(LISTEN_PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server running on http://0.0.0.0:${LISTEN_PORT}`);
+    console.log(`📊 Gold Rates: /api/gold-rates`);
+    console.log(`🛍️  Products: /api/products`);
+    console.log(`🔐 Auth: /api/auth/*`);
+});
