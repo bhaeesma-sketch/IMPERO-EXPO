@@ -668,10 +668,10 @@ export default function Home() {
               <div>
                 <h4 className="font-serif text-lg mb-6 text-gray-900">Collections</h4>
                 <ul className="space-y-4 text-sm text-gray-500 font-light">
-                  <li><a href="#" className="hover:text-primary hover:pl-2 transition-all block">Gold Bullion</a></li>
-                  <li><a href="#" className="hover:text-primary hover:pl-2 transition-all block">Diamond Rings</a></li>
-                  <li><a href="#" className="hover:text-primary hover:pl-2 transition-all block">Bridal Sets</a></li>
-                  <li><a href="#" className="hover:text-primary hover:pl-2 transition-all block">Investment Plans</a></li>
+                  <li><Link href="/catalog?category=bars" className="hover:text-primary hover:pl-2 transition-all block">Gold Bullion</Link></li>
+                  <li><Link href="/catalog?category=jewelry" className="hover:text-primary hover:pl-2 transition-all block">Diamond Rings</Link></li>
+                  <li><Link href="/catalog?category=jewelry" className="hover:text-primary hover:pl-2 transition-all block">Bridal Sets</Link></li>
+                  <li><Link href="/catalog?category=coins" className="hover:text-primary hover:pl-2 transition-all block">Investment Gold</Link></li>
                 </ul>
               </div>
             </Reveal>
@@ -680,9 +680,9 @@ export default function Home() {
               <div>
                 <h4 className="font-serif text-lg mb-6 text-gray-900">Client Care</h4>
                 <ul className="space-y-4 text-sm text-gray-500 font-light">
-                  <li><a href="#" className="hover:text-primary hover:pl-2 transition-all block">Live Gold Rates</a></li>
-                  <li><a href="#" className="hover:text-primary hover:pl-2 transition-all block">Return Policy</a></li>
-                  <li><a href="#" className="hover:text-primary hover:pl-2 transition-all block">Book Appointment</a></li>
+                  <li><Link href="/compare" className="hover:text-primary hover:pl-2 transition-all block">Live Gold Rates</Link></li>
+                  <li><Link href="/terms" className="hover:text-primary hover:pl-2 transition-all block">Return Policy</Link></li>
+                  <li><a href="https://wa.me/971506485898?text=I%20would%20like%20to%20book%20an%20appointment." target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:pl-2 transition-all block">Book Appointment</a></li>
                 </ul>
               </div>
             </Reveal>
@@ -711,9 +711,9 @@ export default function Home() {
           <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 font-light tracking-wide">
             <p>© 2022 Impero Di Gold & Diamonds LLC. All rights reserved.</p>
             <div className="flex gap-8 mt-4 md:mt-0 uppercase">
-              <a href="#" className="hover:text-gray-900 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-gray-900 transition-colors">Terms</a>
-              <a href="#" className="hover:text-gray-900 transition-colors">Sitemap</a>
+              <Link href="/privacy-policy" className="hover:text-gray-900 transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
+              <Link href="/about" className="hover:text-gray-900 transition-colors">About</Link>
             </div>
           </div>
         </div>

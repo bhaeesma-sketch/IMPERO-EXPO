@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useLocation } from 'wouter';
 import { VirtualTryOn } from '@/components/virtual-tryon/VirtualTryOn';
 import { Header } from '@/components/layout/header';
 import { Product, PRODUCTS as STATIC_PRODUCTS } from '@/lib/products';
 import { Loader2 } from 'lucide-react';
 
 export default function TryOnPage() {
+    const [, setLocation] = useLocation();
+
     const { data: dbProducts = [], isLoading } = useQuery<Product[]>({
         queryKey: ['/api/products'],
         queryFn: async () => {
@@ -38,5 +41,5 @@ export default function TryOnPage() {
         );
     }
 
-    return <VirtualTryOn products={jewelryProducts} />;
+    return <VirtualTryOn products={jewelryProducts} onClose={() => setLocation('/')} />;
 }

@@ -150,6 +150,7 @@ export function Header() {
                 { name: 'Catalog', href: '/catalog' },
                 { name: 'Bespoke', href: '/bespoke' },
                 { name: 'Bullion', href: '/catalog?category=bullion' },
+                { name: 'Try On', href: '/try-on' },
                 { name: 'Compare', href: '/compare' },
               ].map((item) => (
                 <Link
@@ -194,7 +195,7 @@ export function Header() {
               <nav className="hidden lg:flex items-center gap-6 text-sm font-medium tracking-wide mr-6 pl-40">
                 {[
                   { name: 'Live Rates', href: '/#rates' },
-                  { name: 'About Us', href: '/#about' },
+                  { name: 'About Us', href: '/about' },
                 ].map((item) => (
                   <Link
                     key={item.name}
@@ -262,10 +263,12 @@ export function Header() {
                 </div>
               )}
 
-              <Button className="hidden md:flex bg-primary hover:bg-primary/90 text-white font-serif tracking-wide gap-2">
-                <Phone className="w-4 h-4" />
-                Concierge
-              </Button>
+              <a href="https://wa.me/971506485898?text=Hello%2C%20I%20am%20interested%20in%20your%20jewelry%20collection." target="_blank" rel="noopener noreferrer">
+                <Button className="hidden md:flex bg-primary hover:bg-primary/90 text-white font-serif tracking-wide gap-2">
+                  <Phone className="w-4 h-4" />
+                  Concierge
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -315,9 +318,10 @@ export function Header() {
                       { name: 'Bespoke', href: '/bespoke' },
                       { name: 'Gold Bullion', href: '/catalog?category=bullion' },
                       { name: 'Diamond Jewelry', href: '/catalog?category=jewelry' },
+                      { name: 'Virtual Try-On', href: '/try-on' },
                       { name: 'Compare Prices', href: '/compare' },
                       { name: 'Live Rates', href: '/#rates' },
-                      { name: 'About Us', href: '/#about' },
+                      { name: 'About Us', href: '/about' },
                     ].map((item) => (
                       <Link
                         key={item.name}
@@ -348,10 +352,12 @@ export function Header() {
                   </nav>
                 </div>
                 <div className="p-6 bg-gray-50">
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-white font-serif gap-2">
-                    <Phone className="w-4 h-4" />
-                    Request Callback
-                  </Button>
+                  <a href="https://wa.me/971506485898?text=Hello%2C%20I%20am%20interested%20in%20your%20jewelry%20collection." target="_blank" rel="noopener noreferrer">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white font-serif gap-2">
+                      <Phone className="w-4 h-4" />
+                      Request Callback
+                    </Button>
+                  </a>
                 </div>
               </motion.div>
             </>
