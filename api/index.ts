@@ -54,6 +54,20 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/download/aab', (req, res) => {
+    const filePath = path.join(__dirname, '..', 'android', 'app', 'build', 'outputs', 'bundle', 'release', 'app-release.aab');
+    const fs = require('fs');
+    if (fs.existsSync(filePath)) {
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.setHeader('Content-Disposition', 'attachment; filename="impero-di-golds-release.aab"');
+        res.setHeader('Cache-Control', 'no-cache');
+        const stream = fs.createReadStream(filePath);
+        stream.pipe(res);
+    } else {
+        res.status(404).send('AAB file not found');
+    }
+});
+
 // Authentication endpoints
 app.post('/api/auth/register', async (req, res) => {
     try {
