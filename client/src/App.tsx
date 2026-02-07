@@ -9,6 +9,8 @@ import Home from "@/pages/home";
 import AuthPage from "@/pages/auth";
 import AdminPage from "@/pages/admin";
 import PrivacyPolicy from "@/pages/privacy-policy";
+import AboutPage from "@/pages/about";
+import TermsPage from "@/pages/terms";
 import NotFound from "@/pages/not-found";
 import ProductDetail from "@/pages/product-detail";
 import ComparePrices from "@/pages/compare-prices";
@@ -42,6 +44,8 @@ function AnimatedRoutes() {
           <Route path="/auth" component={AuthPage} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/privacy-policy" component={PrivacyPolicy} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/terms" component={TermsPage} />
           <Route component={NotFound} />
         </Switch>
       </motion.div>

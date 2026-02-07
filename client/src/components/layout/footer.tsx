@@ -61,8 +61,9 @@ export function Footer() {
                 <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-gray-400 gap-4">
                     <p>© 2024 Impero Di Gold LLC. All Rights Reserved.</p>
                     <div className="flex gap-8">
-                        <Link href="/privacy" className="hover:text-black">Privacy Policy</Link>
+                        <Link href="/privacy-policy" className="hover:text-black">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-black">Terms of Service</Link>
+                        <Link href="/about" className="hover:text-black">About Us</Link>
                     </div>
                 </div>
             </div>
