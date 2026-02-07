@@ -62,3 +62,8 @@ externalPort = 3001
 deploymentTarget = "autoscale"
 run = ["node", "--import", "tsx", "api/index.ts"]
 build = ["npm", "run", "build"]
+
+[userenv]
+
+[userenv.production]
+NODE_ENV = "production"

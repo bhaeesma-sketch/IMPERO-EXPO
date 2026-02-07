@@ -329,7 +329,7 @@ if (isProduction) {
     });
 }
 
-const LISTEN_PORT = isProduction ? 5000 : PORT;
+const LISTEN_PORT = parseInt(process.env.PORT || '0') || (isProduction ? 5000 : PORT);
 
 app.listen(LISTEN_PORT, '0.0.0.0', () => {
     console.log(`🚀 Server running on http://0.0.0.0:${LISTEN_PORT}`);
