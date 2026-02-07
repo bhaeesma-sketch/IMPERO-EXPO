@@ -4,28 +4,39 @@ import session from 'express-session';
 import { db } from './_lib/db';
 import { products, users, activityLogs } from '../shared/schema';
 import { eq, desc, count, sql } from 'drizzle-orm';
-import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 
 const app = express();
 const PORT = 3000;
+const SALT_ROUNDS = 12;
 
 app.use(express.json());
 
-// Session middleware
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction && !process.env.SESSION_SECRET) {
+    throw new Error('SESSION_SECRET environment variable is required in production');
+}
+
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'impero-luxury-secret-key-change-in-production',
+    secret: process.env.SESSION_SECRET || 'impero-dev-secret-key',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: process.env.NODE_ENV === 'production',
+        secure: isProduction,
         httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        sameSite: 'lax',
     }
 }));
 
+const allowedOrigins = [
+    'http://localhost:5000',
+    `https://${process.env.REPLIT_DEV_DOMAIN}`,
+].filter(Boolean);
+
 app.use((req, res, next) => {
     const origin = req.headers.origin;
-    if (origin) {
+    if (origin && allowedOrigins.some(o => origin.startsWith(o!))) {
         res.header('Access-Control-Allow-Origin', origin);
     }
 
@@ -39,11 +50,6 @@ app.use((req, res, next) => {
 
     next();
 });
-
-// Helper function to hash passwords
-function hashPassword(password: string): string {
-    return crypto.createHash('sha256').update(password).digest('hex');
-}
 
 // Authentication endpoints
 app.post('/api/auth/register', async (req, res) => {
@@ -60,8 +66,7 @@ app.post('/api/auth/register', async (req, res) => {
             return res.status(400).json({ message: 'Username already exists' });
         }
 
-        // Create new user
-        const hashedPassword = hashPassword(password);
+        const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
         const newUser = await db.insert(users).values({
             username,
             password: hashedPassword,
@@ -94,9 +99,8 @@ app.post('/api/auth/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        // Verify password
-        const hashedPassword = hashPassword(password);
-        if (user[0].password !== hashedPassword) {
+        const isValidPassword = await bcrypt.compare(password, user[0].password);
+        if (!isValidPassword) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
