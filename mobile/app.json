@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Impero Di Gold",
+    "slug": "impero-di-gold",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#C5A059"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.imperodgold.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#C5A059"
+      },
+      "package": "com.imperodgold.app"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "impero-di-gold"
+      }
+    }
+  }
+}

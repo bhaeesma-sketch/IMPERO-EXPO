@@ -1,0 +1,63 @@
+pm install
+npx expo start --clear
+rm: node_modules/react-native: Permission denied
+rm: node_modules/@expo: Permission denied
+rm: node_modules: Permission denied
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+
+added 759 packages, changed 1 package, and audited 761 packages in 40s
+
+66 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Starting project at /Applications/mobile
+Starting Metro Bundler
+warning: Bundler cache is empty, rebuilding (this may take a minute)
+The following packages should be updated for best compatibility with the installed expo version:
+  expo-linking@7.1.7 - expected version: ~8.0.11
+  expo-status-bar@2.2.3 - expected version: ~3.0.9
+  react@18.3.1 - expected version: 19.1.0
+  react-native@0.77.0 - expected version: 0.81.5
+Your project may not work correctly until you install the expected versions of the packages.
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█ ▄▄▄▄▄ █   █▄ █▄▀█ ▄▄▄▄▄ █
+█ █   █ █ ▀▄ █▀▄ ▄█ █   █ █
+█ █▄▄▄█ █▀██▀▀█▀▄▀█ █▄▄▄█ █
+█▄▄▄▄▄▄▄█▄▀▄█ █▄▀ █▄▄▄▄▄▄▄█
+█  ██▄▄▄▀▀▀▀▄▀█▄▀▄▀█ ▀▄▄ ▄█
+███▄███▄ ▀█▀ ▄██▄▄▄█▀   ▀██
+█ ▄█▄▄ ▄ ▄█▄█▄▀▄ █▀▄ ▀▄ ▀██
+███▀▄█ ▄ ▄▄▄█▀██  ▀███ ▀███
+█▄▄████▄▄▀▀▄▄▀█▄▀ ▄▄▄ ▀ ▄▄█
+█ ▄▄▄▄▄ █▀▀█ ▄██▀ █▄█ ▀▀█▀█
+█ █   █ █▄▄▄█▄▀▄█ ▄ ▄▄▀   █
+█ █▄▄▄█ █▀▄▄█▀█▀▄▄▄ ▀█▀▀ ██
+█▄▄▄▄▄▄▄█▄▄█▄▄▄▄████▄▄▄▄▄▄█
+
+› Metro waiting on exp://10.14.20.115:8081
+› Scan the QR code above with Expo Go (Android) or the Camera app (iOS)
+
+› Using Expo Go
+› Press s │ switch to development build
+
+› Press a │ open Android
+› Press i │ open iOS simulator
+› Press w │ open web
+
+› Press j │ open debugger
+› Press r │ reload app
+› Press m │ toggle menu
+› shift+m │ more tools
+› Press o │ open project code in your editor
+
+› Press ? │ show all commands
+
+Logs for your project will appear below. Press Ctrl+C to exit.
+

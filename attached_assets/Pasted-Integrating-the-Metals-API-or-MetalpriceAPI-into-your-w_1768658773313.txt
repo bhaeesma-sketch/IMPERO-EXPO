@@ -1,0 +1,38 @@
+Integrating the **Metals-API** (or **MetalpriceAPI**) into your website like **imperodigolduae.com** requires a two-step approach: securing your API key on a backend server and then fetching that data for your frontend "Live Rates Agent". For a professional bullion site, you must avoid putting your API key directly in the frontend code, as it can be easily stolen by anyone inspecting your site.
+
+### Step 1: Secure Your API Key in Replit
+
+Do not hardcode your API key. Use Replit's **Secrets** tool:
+
+1. Open your project in Replit.
+2. Go to the **Secrets** (padlock icon) in the sidebar.
+3. Add a new secret with the key `METALS_API_KEY` and your actual API key as the value.
+
+### Step 2: The Replit Implementation Prompt
+
+Copy and paste this prompt into Replit Agent to build the integration:
+
+> **"Set up a secure backend for my gold business using Node.js and Express to fetch live rates from Metals-API.**
+> **1. Backend Proxy (Server-side):**
+> * Create a file `src/server/api.js`.
+> * Use **Axios** to fetch the latest rates from `https://api.metalpriceapi.com/v1/latest` using the `METALS_API_KEY` stored in my secrets.
+> * Set the base currency to **AED** and specify currencies: **XAU** (Gold) and **XAG** (Silver).
+> * Calculate 24K, 22K, and 18K gold prices from the raw XAU (ounce) data using the formula: `(Price / 31.1035) * (Karat / 24)`.
+> 
+> 
+> **2. Frontend Integration (React):**
+> * Build a React component `LiveTicker.jsx` that fetches data from my own internal endpoint `/api/gold-rates` every 10 minutes.
+> * Show the rates for **Gold 24K, 22K, 18K** and **Silver** in a premium light-themed header bar.
+> * Add a 'Pulse' animation that triggers when the data refreshes to show the user the site is live."
+> 
+> 
+
+### 3 Professional "Expert" Tips for Metals-API:
+
+* **The Math:** Metals APIs usually give the price per **Troy Ounce**. For your UAE customers, you must convert this to **Grams** by dividing by **31.1034768**.
+* **CORS Security:** Ensure your backend only allows requests from your own domain (`imperodigolduae.com`) to prevent other people from using your expensive $399 API for their own sites.
+* **Caching:** Instead of hitting the API for every single visitor, have your server fetch the price once and save it in memory for 10 minutes. This prevents you from running out of your API quota.
+
+[How to Fetch Live Gold and Silver Prices with API](https://www.youtube.com/watch?v=GV-ccNvFi8Q)
+
+This video is relevant because it provides a complete guide and working code examples for fetching live precious metal data in Node.js, which is the exact technical stack you are using in Replit.
