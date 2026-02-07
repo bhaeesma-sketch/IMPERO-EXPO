@@ -1,7 +1,7 @@
 modules = ["nodejs-20", "postgresql-16", "java-graalvm22.3"]
 [nix]
 channel = "stable-25_05"
-packages = ["unzip", "android-tools", "jdk17"]
+packages = ["unzip", "android-tools", "jdk17", "file"]
 
 [agent]
 expertMode = true
