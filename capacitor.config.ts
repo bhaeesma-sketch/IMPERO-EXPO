@@ -1,9 +1,35 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.imperoid.app',
-  appName: 'Impero ID',
+  appId: 'com.imperodigold.app',
+  appName: 'Impero Di Golds & Diamonds',
   webDir: 'dist',
+  server: {
+    androidScheme: 'https',
+    iosScheme: 'https',
+  },
+  ios: {
+    contentInset: 'automatic',
+    preferredContentMode: 'mobile',
+    scheme: 'imperodigold',
+  },
+  android: {
+    allowMixedContent: false,
+  },
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      backgroundColor: '#000000',
+      showSpinner: false,
+      androidSplashResourceName: 'splash',
+      splashFullScreen: true,
+      splashImmersive: true,
+    },
+    StatusBar: {
+      style: 'LIGHT',
+      backgroundColor: '#000000',
+    },
+  },
 };
 
 export default config;

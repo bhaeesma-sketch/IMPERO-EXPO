@@ -7,3 +7,16 @@ vite.config.ts.*
 .vercel
 .env*.local
 .config
+
+# Capacitor native build artifacts
+ios/App/Pods
+ios/App/App/public
+ios/App/capacitor.config.json
+android/app/src/main/assets/public
+android/app/src/main/assets/capacitor.config.json
+android/.gradle
+android/app/build
+android/build
+*.apk
+*.aab
+*.ipa

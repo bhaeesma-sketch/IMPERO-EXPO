@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Impero Di Golds &amp; Diamonds</string>
+    <string name="title_activity_main">Impero Di Golds &amp; Diamonds</string>
+    <string name="package_name">com.imperodigold.app</string>
+    <string name="custom_url_scheme">com.imperodigold.app</string>
+</resources>
