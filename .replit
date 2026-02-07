@@ -43,7 +43,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "node /tmp/serve_aab.js"
+args = "npm run dev"
 waitForPort = 5000
 
 [[ports]]
