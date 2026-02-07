@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Menu, X, Phone, User, LogOut, Settings, Moon, Sun } from 'lucide-react';
+import { Search, Menu, X, Phone, User, LogOut, Settings, Moon, Sun, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'wouter';
 import { useAuth } from '@/hooks/use-auth';
 import { useTheme } from '@/hooks/use-theme';
+import { useWishlist } from '@/hooks/use-wishlist';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { VaultUnlock } from '@/components/admin/VaultUnlock';
-// ... other imports ...
+import { NotificationBell } from '@/components/notifications/notification-bell';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,6 +31,7 @@ export function Header() {
   const [swipeStartX, setSwipeStartX] = useState(0);
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { count: wishlistCount } = useWishlist();
   const [, setLocation] = useLocation();
 
   // Triple tap detection
@@ -220,9 +222,16 @@ export function Header() {
                 )}
               </button>
 
-              <button className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary">
-                <Search className="w-5 h-5" />
-              </button>
+              <Link href="/wishlist">
+                <button className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary relative">
+                  <Heart className="w-5 h-5" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center">{wishlistCount}</span>
+                  )}
+                </button>
+              </Link>
+
+              <NotificationBell />
 
               {user ? (
                 <DropdownMenu>
@@ -320,6 +329,8 @@ export function Header() {
                       { name: 'Diamond Jewelry', href: '/catalog?category=jewelry' },
                       { name: 'Virtual Try-On', href: '/try-on' },
                       { name: 'Compare Prices', href: '/compare' },
+                      { name: 'EMI Calculator', href: '/emi-calculator' },
+                      { name: 'My Wishlist', href: '/wishlist' },
                       { name: 'Live Rates', href: '/#rates' },
                       { name: 'About Us', href: '/about' },
                     ].map((item) => (

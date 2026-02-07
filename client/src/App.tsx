@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/use-auth";
+import { WishlistProvider } from "@/hooks/use-wishlist";
 import { ThemeProvider } from "@/hooks/use-theme";
 import Home from "@/pages/home";
 import AuthPage from "@/pages/auth";
@@ -17,6 +18,8 @@ import ComparePrices from "@/pages/compare-prices";
 import TryOnPage from "@/pages/try-on";
 import BespokePage from "@/pages/bespoke";
 import CatalogPage from "@/pages/catalog";
+import WishlistPage from "@/pages/wishlist";
+import EMICalculator from "@/pages/emi-calculator";
 import { useAnalytics } from "@/hooks/use-analytics";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { AnimatePresence, motion } from "framer-motion";
@@ -46,6 +49,8 @@ function AnimatedRoutes() {
           <Route path="/privacy-policy" component={PrivacyPolicy} />
           <Route path="/about" component={AboutPage} />
           <Route path="/terms" component={TermsPage} />
+          <Route path="/wishlist" component={WishlistPage} />
+          <Route path="/emi-calculator" component={EMICalculator} />
           <Route component={NotFound} />
         </Switch>
       </motion.div>
@@ -64,12 +69,14 @@ function App() {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
+          <WishlistProvider>
           <TooltipProvider>
             <ScrollProgress />
             <AnalyticsTracker />
             <AnimatedRoutes />
             <Toaster />
           </TooltipProvider>
+          </WishlistProvider>
         </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>

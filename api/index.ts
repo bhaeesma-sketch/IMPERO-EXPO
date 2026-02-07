@@ -4,8 +4,8 @@ import session from 'express-session';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { db } from './_lib/db';
-import { products, users, activityLogs } from '../shared/schema';
-import { eq, desc, count, sql } from 'drizzle-orm';
+import { products, users, activityLogs, wishlists, notifications, goldRateAlerts } from '../shared/schema';
+import { eq, desc, count, sql, and, inArray } from 'drizzle-orm';
 import bcrypt from 'bcrypt';
 
 const app = express();
@@ -314,6 +314,189 @@ app.get('/api/analytics/stats', async (req, res) => {
         });
     } catch (error) {
         console.error('Fetch stats error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// ============ WISHLIST API ============
+
+app.get('/api/wishlist', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const items = await db.select().from(wishlists).where(eq(wishlists.userId, userId)).orderBy(desc(wishlists.createdAt));
+        res.json(items);
+    } catch (error) {
+        console.error('Wishlist fetch error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.post('/api/wishlist', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const { productId } = req.body;
+        if (!productId) return res.status(400).json({ message: 'Product ID is required' });
+
+        const existing = await db.select().from(wishlists).where(and(eq(wishlists.userId, userId), eq(wishlists.productId, productId)));
+        if (existing.length > 0) {
+            return res.json({ message: 'Already in wishlist', item: existing[0] });
+        }
+
+        const item = await db.insert(wishlists).values({ userId, productId }).returning();
+        res.json(item[0]);
+    } catch (error) {
+        console.error('Wishlist add error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.delete('/api/wishlist/:productId', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        await db.delete(wishlists).where(and(eq(wishlists.userId, userId), eq(wishlists.productId, req.params.productId)));
+        res.json({ message: 'Removed from wishlist' });
+    } catch (error) {
+        console.error('Wishlist remove error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// ============ NOTIFICATIONS API ============
+
+app.get('/api/notifications', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const items = await db.select().from(notifications).where(eq(notifications.userId, userId)).orderBy(desc(notifications.createdAt)).limit(50);
+        res.json(items);
+    } catch (error) {
+        console.error('Notifications fetch error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/notifications/unread-count', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.json({ count: 0 });
+
+        const result = await db.select({ count: count() }).from(notifications).where(and(eq(notifications.userId, userId), eq(notifications.isRead, false)));
+        res.json({ count: result[0]?.count || 0 });
+    } catch (error) {
+        console.error('Notifications count error:', error);
+        res.json({ count: 0 });
+    }
+});
+
+app.post('/api/notifications/mark-read', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const { ids } = req.body;
+        if (ids && Array.isArray(ids) && ids.length > 0) {
+            await db.update(notifications).set({ isRead: true }).where(and(eq(notifications.userId, userId), inArray(notifications.id, ids)));
+        } else {
+            await db.update(notifications).set({ isRead: true }).where(eq(notifications.userId, userId));
+        }
+        res.json({ message: 'Marked as read' });
+    } catch (error) {
+        console.error('Mark read error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// ============ GOLD RATE ALERTS API ============
+
+app.get('/api/gold-alerts', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const alerts = await db.select().from(goldRateAlerts).where(eq(goldRateAlerts.userId, userId)).orderBy(desc(goldRateAlerts.createdAt));
+        res.json(alerts);
+    } catch (error) {
+        console.error('Gold alerts fetch error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.post('/api/gold-alerts', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const { purity, targetPrice, condition } = req.body;
+        if (!purity || !targetPrice || !condition) {
+            return res.status(400).json({ message: 'Purity, target price, and condition are required' });
+        }
+
+        const alert = await db.insert(goldRateAlerts).values({
+            userId,
+            purity,
+            targetPrice: parseFloat(targetPrice),
+            condition,
+        }).returning();
+
+        res.json(alert[0]);
+    } catch (error) {
+        console.error('Gold alert create error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.delete('/api/gold-alerts/:id', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        await db.delete(goldRateAlerts).where(and(eq(goldRateAlerts.id, parseInt(req.params.id)), eq(goldRateAlerts.userId, userId)));
+        res.json({ message: 'Alert deleted' });
+    } catch (error) {
+        console.error('Gold alert delete error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+app.patch('/api/gold-alerts/:id/toggle', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const existing = await db.select().from(goldRateAlerts).where(and(eq(goldRateAlerts.id, parseInt(req.params.id)), eq(goldRateAlerts.userId, userId)));
+        if (existing.length === 0) return res.status(404).json({ message: 'Alert not found' });
+
+        const updated = await db.update(goldRateAlerts).set({ isActive: !existing[0].isActive }).where(eq(goldRateAlerts.id, parseInt(req.params.id))).returning();
+        res.json(updated[0]);
+    } catch (error) {
+        console.error('Gold alert toggle error:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// ============ LANGUAGE PREFERENCE ============
+
+app.put('/api/auth/language', async (req, res) => {
+    try {
+        const userId = (req.session as any).userId;
+        if (!userId) return res.status(401).json({ message: 'Not authenticated' });
+
+        const { language } = req.body;
+        if (!['en', 'ar', 'hi', 'ur'].includes(language)) {
+            return res.status(400).json({ message: 'Invalid language' });
+        }
+
+        await db.update(users).set({ preferredLanguage: language }).where(eq(users.id, userId));
+        res.json({ message: 'Language updated' });
+    } catch (error) {
+        console.error('Language update error:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
