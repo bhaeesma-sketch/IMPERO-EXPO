@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-13
     
     steps:
       - uses: actions/checkout@v3
@@ -24,6 +24,20 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync ios
         
+      - name: Import Code-Signing Certificates
+        uses: Apple-Actions/import-codesign-certs@v2
+        with:
+          p12-file-base64: ${{ secrets.IOS_DIST_SIGNING_KEY }}
+          p12-password: ${{ secrets.IOS_DIST_SIGNING_KEY_PASSWORD }}
+      
+      - name: Download Provisioning Profiles
+        uses: Apple-Actions/download-provisioning-profiles@v1
+        with:
+          bundle-identifier: com.bhaees.rest-express
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
+          
       - name: Build iOS Archive
         run: |
           cd ios
@@ -31,13 +45,18 @@ jobs:
             -scheme restexpress \
             -configuration Release \
             -archivePath build/restexpress.xcarchive \
-            archive \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
+            archive
             
-      - name: Upload Archive
+      - name: Export IPA
+        run: |
+          cd ios
+          xcodebuild -exportArchive \
+            -archivePath build/restexpress.xcarchive \
+            -exportPath build \
+            -exportOptionsPlist ../ExportOptions.plist
+            
+      - name: Upload IPA
         uses: actions/upload-artifact@v3
         with:
-          name: ios-archive
-          path: ios/build/restexpress.xcarchive
+          name: Impero-iOS-App
+          path: ios/build/*.ipa
