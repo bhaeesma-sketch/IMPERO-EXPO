@@ -9,10 +9,6 @@ workflows:
       vars:
         XCODE_WORKSPACE: "ios/restexpress.xcodeproj"
         XCODE_SCHEME: "restexpress"
-        APP_STORE_CONNECT_ISSUER_ID: Encrypted(...)
-        APP_STORE_CONNECT_KEY_IDENTIFIER: Encrypted(...)
-        APP_STORE_CONNECT_PRIVATE_KEY: Encrypted(...)
-        CERTIFICATE_PRIVATE_KEY: Encrypted(...)
       node: latest
     scripts:
       - name: Install dependencies
