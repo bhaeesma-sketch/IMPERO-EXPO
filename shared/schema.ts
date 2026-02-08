@@ -98,6 +98,31 @@ export const activityLogs = pgTable("activity_logs", {
   timestamp: timestamp("timestamp").defaultNow().notNull(),
 });
 
+// SEARCH & FILTERING SYSTEM
+export const searchQueries = pgTable("search_queries", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id").references(() => users.id, { onDelete: "set null" }),
+  query: text("query").notNull(),
+  filters: jsonb("filters"), // {purity, category, priceRange, weight}
+  resultsCount: integer("results_count").notNull(),
+  clickedProductId: text("clicked_product_id"),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+});
+
+export const productReviews = pgTable("product_reviews", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  productId: text("product_id").notNull().references(() => products.id, { onDelete: "cascade" }),
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  rating: integer("rating").notNull(), // 1-5
+  title: text("title").notNull(),
+  comment: text("comment"),
+  images: text("images").array(), // URLs of user photos
+  verifiedPurchase: boolean("verified_purchase").default(false).notNull(),
+  helpfulCount: integer("helpful_count").default(0).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 export const insertGoldPriceHistorySchema = createInsertSchema(goldPriceHistory).omit({
   id: true,
   timestamp: true,
@@ -126,6 +151,19 @@ export const insertGoldRateAlertSchema = createInsertSchema(goldRateAlerts).omit
   isActive: true,
 });
 
+// New schemas for search & reviews
+export const insertProductReviewSchema = createInsertSchema(productReviews).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertSearchQuerySchema = createInsertSchema(searchQueries).omit({
+  id: true,
+  timestamp: true,
+});
+
+// Type exports
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertProduct = z.infer<typeof insertProductSchema>;
@@ -140,3 +178,9 @@ export type Notification = typeof notifications.$inferSelect;
 export type InsertNotification = z.infer<typeof insertNotificationSchema>;
 export type GoldRateAlert = typeof goldRateAlerts.$inferSelect;
 export type InsertGoldRateAlert = z.infer<typeof insertGoldRateAlertSchema>;
+
+// New types for search & reviews
+export type ProductReview = typeof productReviews.$inferSelect;
+export type InsertProductReview = z.infer<typeof insertProductReviewSchema>;
+export type SearchQuery = typeof searchQueries.$inferSelect;
+export type InsertSearchQuery = z.infer<typeof insertSearchQuerySchema>;

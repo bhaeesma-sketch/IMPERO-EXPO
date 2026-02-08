@@ -1,0 +1,43 @@
+name: Build iOS App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build web app
+        run: npm run build
+        
+      - name: Sync Capacitor
+        run: npx cap sync ios
+        
+      - name: Build iOS Archive
+        run: |
+          cd ios
+          xcodebuild -project restexpress.xcodeproj \
+            -scheme restexpress \
+            -configuration Release \
+            -archivePath build/restexpress.xcarchive \
+            archive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+            
+      - name: Upload Archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-archive
+          path: ios/build/restexpress.xcarchive

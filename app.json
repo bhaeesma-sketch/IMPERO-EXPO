@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Impero Di Gold",
+    "slug": "rest-express",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./attached_assets/impero_logo_transparent.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./attached_assets/impero_logo_transparent.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.imperodigold.app",
+      "supportsTablet": true,
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.imperodigold.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./attached_assets/impero_logo_transparent.png",
+        "backgroundColor": "#000000"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "98b3c781-85d0-448b-a514-bf168632703a"
+      }
+    }
+  }
+}

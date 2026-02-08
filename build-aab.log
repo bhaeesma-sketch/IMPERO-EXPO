@@ -1,0 +1,53 @@
+
+> rest-express@1.0.0 build:android
+> vite build && npx cap sync android && cd android && ANDROID_HOME=$HOME/android-sdk ANDROID_SDK_ROOT=$HOME/android-sdk JAVA_HOME=$(dirname $(dirname $(which java))) ./gradlew bundleRelease --no-daemon && cp app/build/outputs/bundle/release/app-release.aab ../impero-di-golds-release.aab && echo 'AAB file ready: impero-di-golds-release.aab'
+
+vite v7.1.12 building for production...
+transforming...
+✓ 3784 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/index.html                                                            2.19 kB │ gzip:   0.80 kB
+../dist/assets/impero_logo_transparent-C-oEOCwv.png                         484.43 kB
+../dist/assets/silver_bar_500g-CPVphExI.png                                 504.26 kB
+../dist/assets/gold_bar_100g-BklP-xPM.png                                   555.28 kB
+../dist/assets/gold_bar_50g-hWTfk3JW.png                                    593.37 kB
+../dist/assets/gold_coin_10g-Dg_pC7tV.png                                   601.59 kB
+../dist/assets/silver_bar_10oz-BYHtQOWA.png                                 609.15 kB
+../dist/assets/silver_bar_1kg-BYdTBrBr.png                                  616.12 kB
+../dist/assets/silver_coin_1oz-CQ8UaAKb.png                                 637.99 kB
+../dist/assets/gold_bar_minted_realistic-zpwV5A-o.png                       657.23 kB
+../dist/assets/diamond_necklace_luxury-CKL3qGZp.png                         667.20 kB
+../dist/assets/diamond_solitaire_ring-CM0Hp92-.png                          676.77 kB
+../dist/assets/gold_coin_5g-D0kRbbiN.png                                    691.61 kB
+../dist/assets/idi_10_tola_gold_bar-1ZMBUE5I.png                            696.41 kB
+../dist/assets/gold_coin_realistic-CYAEVQGM.png                             701.66 kB
+../dist/assets/gold_bar_cast_realistic-PyvSC6u_.png                         775.29 kB
+../dist/assets/white_marble_luxury_texture_background-CfGcjqw8.png          991.79 kB
+../dist/assets/luxury_light_idi_coin_packaging-yPLuM-Ew.png               1,008.33 kB
+../dist/assets/diamond_dust_on_black_velvet-DQExm9tv.png                  1,186.11 kB
+../dist/assets/luxury_gold_jewelry_set-BvLK_aNf.png                       1,251.00 kB
+../dist/assets/model_wearing_luxury_diamond_necklace-BNKROm3v.png         1,288.43 kB
+../dist/assets/close_up_of_master_jeweler_setting_a_diamond-a_22pMjD.png  1,359.43 kB
+../dist/assets/luxury_gold_texture_wave_abstract-B0Fzg7KA.png             1,424.17 kB
+../dist/assets/luxury_diamond_necklace_on_model-BtjxPV7T.png              1,488.52 kB
+../dist/assets/gold_bullion_bars_in_vault-BWEO285E.png                    1,489.40 kB
+../dist/assets/luxury_jewelry_boutique_interior-BNpfrIa9.png              1,489.46 kB
+../dist/assets/fashion_model_with_gold_bangles-Z28oqWNE.png               1,500.42 kB
+../dist/assets/luxury_jewelry_design_sketch-DtMpeA06.png                  1,617.95 kB
+../dist/assets/elegant_woman_with_gold_bridal_jewelry-C2bighB8.png        1,759.74 kB
+../dist/assets/intricate_gold_filigree_pattern-YrJennoM.png               2,003.91 kB
+../dist/assets/index-DexqHu3R.css                                           157.96 kB │ gzip:  23.13 kB
+../dist/assets/index-clV9iAAK.js                                          2,201.78 kB │ gzip: 633.54 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 25.71s
+✔ Copying web assets from dist to android/app/src/main/assets/public in 1.76s
+✔ Creating capacitor.config.json in android/app/src/main/assets in 1.45ms
+✔ copy android in 2.11s
+✔ Updating Android plugins in 66.33ms
+✔ update android in 252.20ms
+[info] Sync finished in 2.975s

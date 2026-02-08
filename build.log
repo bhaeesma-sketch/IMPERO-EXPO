@@ -1,0 +1,8 @@
+★ eas-cli@16.32.0 is now available.
+To upgrade, run:
+npm install -g eas-cli
+Proceeding with outdated version.
+
+✔ Generated eas.json. Learn more: https://docs.expo.dev/build-reference/eas-json/
+EAS project not configured.
+Must configure EAS project by running 'eas init' before this command can be run in non-interactive mode.

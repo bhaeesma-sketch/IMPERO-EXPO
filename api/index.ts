@@ -7,6 +7,8 @@ import { db } from './_lib/db';
 import { products, users, activityLogs, wishlists, notifications, goldRateAlerts } from '../shared/schema';
 import { eq, desc, count, sql, and, inArray } from 'drizzle-orm';
 import bcrypt from 'bcrypt';
+import searchRouter from './search';
+import { calculateRetailPrice } from '../shared/pricing';
 
 const app = express();
 const PORT = 3000;
@@ -53,6 +55,9 @@ app.use((req, res, next) => {
 
     next();
 });
+
+// Register API routers for implementations
+app.use('/api', searchRouter);
 
 app.get('/download/aab', (req, res) => {
     const aabPath = path.resolve('android', 'app', 'build', 'outputs', 'bundle', 'release', 'app-release.aab');
@@ -202,23 +207,33 @@ app.get('/api/gold-rates', async (req, res) => {
             }
         }
 
-        // Final fallback: Mock data
+        // Final fallback: Mock data (realistic Dubai spot price)
         if (!goldPerGram) {
-            goldPerGram = 315.50;
+            goldPerGram = 254.50; // Approximate spot price per gram
             source = 'fallback_mock';
         }
 
-        // Add Dubai retail premium
-        const dubaiPrice = goldPerGram + 4.50;
+        // Calculate retail prices with proper markups
+        const rates24K = calculateRetailPrice(goldPerGram, '24K');
+        const rates22K = calculateRetailPrice(goldPerGram, '22K');
+        const rates21K = calculateRetailPrice(goldPerGram, '21K');
+        const rates18K = calculateRetailPrice(goldPerGram, '18K');
 
         const rates = {
-            "24K": +(dubaiPrice).toFixed(2),
-            "22K": +(dubaiPrice * (22 / 24)).toFixed(2),
-            "21K": +(dubaiPrice * (21 / 24)).toFixed(2),
-            "18K": +(dubaiPrice * (18 / 24)).toFixed(2),
+            "24K": +(rates24K.total).toFixed(2),
+            "22K": +(rates22K.total).toFixed(2),
+            "21K": +(rates21K.total).toFixed(2),
+            "18K": +(rates18K.total).toFixed(2),
             "Silver": 3.80,
             timestamp: new Date().toISOString(),
             source,
+            breakdown: {
+                spotPricePerGram: +goldPerGram.toFixed(2),
+                "24K": { spotPrice: +rates24K.spotPrice.toFixed(2), retailMarkup: +rates24K.retailMarkup.toFixed(2), makingCharge: +rates24K.makingCharge.toFixed(2), total: +rates24K.total.toFixed(2) },
+                "22K": { spotPrice: +rates22K.spotPrice.toFixed(2), retailMarkup: +rates22K.retailMarkup.toFixed(2), makingCharge: +rates22K.makingCharge.toFixed(2), total: +rates22K.total.toFixed(2) },
+                "21K": { spotPrice: +rates21K.spotPrice.toFixed(2), retailMarkup: +rates21K.retailMarkup.toFixed(2), makingCharge: +rates21K.makingCharge.toFixed(2), total: +rates21K.total.toFixed(2) },
+                "18K": { spotPrice: +rates18K.spotPrice.toFixed(2), retailMarkup: +rates18K.retailMarkup.toFixed(2), makingCharge: +rates18K.makingCharge.toFixed(2), total: +rates18K.total.toFixed(2) },
+            }
         };
 
         res.json(rates);

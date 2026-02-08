@@ -1,0 +1,12 @@
+node_modules/
+.git/
+android/
+ios/
+dist/
+build/
+.config/
+.local/
+.vercel/
+attached_assets/
+*.log
+.DS_Store

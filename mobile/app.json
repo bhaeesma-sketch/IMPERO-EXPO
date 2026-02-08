@@ -22,11 +22,6 @@
         "backgroundColor": "#C5A059"
       },
       "package": "com.imperodgold.app"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "impero-di-gold"
-      }
     }
   }
 }

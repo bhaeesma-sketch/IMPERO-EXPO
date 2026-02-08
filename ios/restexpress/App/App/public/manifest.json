@@ -1,0 +1,22 @@
+{
+  "name": "Impero Di Golds & Diamonds",
+  "short_name": "Impero Gold",
+  "description": "Premium gold bullion and diamond jewelry in UAE. Live rates, secure investment plans, and exquisite craftsmanship.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#BF953F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
