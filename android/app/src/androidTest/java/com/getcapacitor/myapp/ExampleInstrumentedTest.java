@@ -1,4 +1,4 @@
-package com.imperodigold.app;
+package com.imperodigolds.app;
 
 import static org.junit.Assert.*;
 
@@ -14,6 +14,6 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.imperodigold.app", appContext.getPackageName());
+        assertEquals("com.imperodigolds.app", appContext.getPackageName());
     }
 }

@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Impero Di Golds &amp; Diamonds</string>
     <string name="title_activity_main">Impero Di Golds &amp; Diamonds</string>
-    <string name="package_name">com.imperodigold.app</string>
-    <string name="custom_url_scheme">com.imperodigold.app</string>
+    <string name="package_name">com.imperodigolds.app</string>
+    <string name="custom_url_scheme">com.imperodigolds.app</string>
 </resources>

@@ -19,7 +19,7 @@ export default function TryOnPage() {
     });
 
     const products = dbProducts.length > 0 ? dbProducts : STATIC_PRODUCTS;
-    const jewelryProducts = products.filter(p => p.type === 'jewelry');
+    const jewelryProducts = products.filter(p => p.type === 'jewelry' || p.category === 'jewelry');
 
     if (isLoading) {
         return (

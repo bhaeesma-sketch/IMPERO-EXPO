@@ -4,11 +4,28 @@
     "appVersionSource": "remote"
   },
   "build": {
+    "production": {
+      "ios": {
+        "simulator": false,
+        "buildConfiguration": "Release",
+        "resourceClass": "m-medium"
+      }
+    },
     "production-ios": {
       "ios": {
         "simulator": false,
         "buildConfiguration": "Release",
         "resourceClass": "m-medium"
+      }
+    },
+    "production-aab": {
+      "android": {
+        "buildType": "app-bundle"
+      }
+    },
+    "preview-apk": {
+      "android": {
+        "buildType": "apk"
       }
     }
   },
@@ -16,7 +33,14 @@
     "production": {
       "ios": {
         "appleId": "bhaeesdev@gmail.com",
-        "ascAppId": "PLACEHOLDER",
+        "ascAppId": "6760141420",
+        "appleTeamId": "5K6QH7W9AT"
+      }
+    },
+    "production-ios": {
+      "ios": {
+        "appleId": "bhaeesdev@gmail.com",
+        "ascAppId": "6760141420",
         "appleTeamId": "5K6QH7W9AT"
       }
     }

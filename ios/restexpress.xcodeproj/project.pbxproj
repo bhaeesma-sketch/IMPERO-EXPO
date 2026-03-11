@@ -263,7 +263,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bhaees.rest-express";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imperodigolds.app";
 				PRODUCT_NAME = restexpress;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "restexpress/restexpress-Bridging-Header.h";
@@ -296,7 +296,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bhaees.rest-express";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imperodigolds.app";
 				PRODUCT_NAME = restexpress;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "restexpress/restexpress-Bridging-Header.h";

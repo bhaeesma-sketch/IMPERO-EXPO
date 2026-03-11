@@ -11,11 +11,11 @@ import diamondRingImg from '@assets/generated_images/diamond_solitaire_ring.png'
 import jewelrySetImg from '@assets/generated_images/luxury_gold_jewelry_set.png';
 import silverCoinImg from '@assets/generated_images/silver_coin_1oz.png';
 import silverBar10ozImg from '@assets/generated_images/silver_bar_10oz.png';
-import silverBar1kgImg from '@assets/generated_images/silver_bar_1kg.png';
+import silverBar1kgImg from '@assets/generated_images/silver_bar_1kg_premium_1773206561173.png';
 import goldCoin5gImg from '@assets/generated_images/gold_coin_5g.png';
 import goldCoin10gImg from '@assets/generated_images/gold_coin_10g.png';
-import goldBar50gImg from '@assets/generated_images/gold_bar_50g.png';
-import goldBar100gImg from '@assets/generated_images/gold_bar_100g.png';
+import goldBar50gImg from '@assets/generated_images/gold_bar_50g_premium_1773206169803.png';
+import goldBar100gImg from '@assets/generated_images/gold_bar_100g_premium_1773206611081.png';
 import diamondNecklaceImg from '@assets/generated_images/diamond_necklace_luxury.png';
 import silverBar500gImg from '@assets/generated_images/silver_bar_500g.png';
 import { MetalType } from './gold-price';
@@ -32,6 +32,7 @@ export interface Product {
   makingCharge: number;
   type: 'bullion' | 'jewelry';
   category: 'coins' | 'bars' | 'silver' | 'jewelry';
+  jewelryType?: 'ring' | 'necklace' | 'earrings' | 'bracelet' | 'nose_ring';
   description: string;
   manufacturer: string;
   availability: 'In Stock' | 'Out of Stock' | 'Made to Order';
@@ -179,6 +180,7 @@ export const PRODUCTS: Product[] = [
     makingCharge: 150,
     type: "jewelry",
     category: "jewelry",
+    jewelryType: "ring",
     description: "An epitome of grace, this Royal Solitaire Ring features a hand-selected center diamond set in 18K white gold. Designed to maximize brilliance, it is a timeless symbol of love and commitment.",
     manufacturer: "Impero Di Gold",
     availability: "In Stock",
@@ -194,6 +196,7 @@ export const PRODUCTS: Product[] = [
     makingCharge: 180,
     type: "jewelry",
     category: "jewelry",
+    jewelryType: "ring",
     description: "Vintage glamour meets modern precision. The Emerald Cut Halo ring features a stunning rectangular diamond surrounded by a halo of brilliant round stones, all set in polished 18K gold.",
     manufacturer: "Impero Di Gold",
     availability: "Made to Order",
@@ -209,6 +212,7 @@ export const PRODUCTS: Product[] = [
     makingCharge: 120,
     type: "jewelry",
     category: "jewelry",
+    jewelryType: "necklace",
     description: "A magnificent 21K gold necklace set designed for the modern bride. Intricate filigree work and diamond-cut accents create a shimmering effect that commands attention. Includes matching earrings.",
     manufacturer: "Impero Di Gold",
     availability: "Made to Order",
@@ -224,6 +228,7 @@ export const PRODUCTS: Product[] = [
     makingCharge: 200,
     type: "jewelry",
     category: "jewelry",
+    jewelryType: "ring",
     description: "An unbroken circle of diamonds, representing eternal love. This Eternity Band is set with perfectly matched round brilliant diamonds in 18K gold. Can be worn alone or stacked.",
     manufacturer: "Impero Di Gold",
     availability: "In Stock",
@@ -463,6 +468,7 @@ export const PRODUCTS: Product[] = [
     makingCharge: 250,
     type: "jewelry",
     category: "jewelry",
+    jewelryType: "necklace",
     description: "Breathtaking diamond necklace in 18K white gold featuring an intricate cascade design with multiple brilliant-cut diamonds. A statement piece that embodies luxury and sophistication.",
     manufacturer: "Impero Di Gold",
     availability: "Made to Order",
@@ -478,6 +484,7 @@ export const PRODUCTS: Product[] = [
     makingCharge: 100,
     type: "jewelry",
     category: "jewelry",
+    jewelryType: "bracelet",
     description: "Traditional 21K gold bangle set with modern finishing. Set of 4 bangles featuring intricate patterns and diamond-cut details. Perfect for everyday luxury or special occasions.",
     manufacturer: "Impero Di Gold",
     availability: "In Stock",

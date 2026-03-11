@@ -34,13 +34,13 @@ export function VirtualTryOn({ products, initialProductIndex = 0, onClose }: Vir
     const containerRef = useRef<HTMLDivElement>(null);
 
     const currentProduct = products[currentProductIndex];
-    const productType = currentProduct?.type === 'jewelry' ?
+    const productType = currentProduct?.jewelryType || (currentProduct?.type === 'jewelry' ?
         (currentProduct.name.toLowerCase().includes('earring') ? 'earrings' :
             currentProduct.name.toLowerCase().includes('ring') ? 'ring' :
                 currentProduct.name.toLowerCase().includes('nose') ? 'nose_ring' :
-                    currentProduct.name.toLowerCase().includes('bracelet') ? 'bracelet' :
+                    currentProduct.name.toLowerCase().includes('bracelet') || currentProduct.name.toLowerCase().includes('bangle') ? 'bracelet' :
                         'necklace') :
-        'necklace';
+        'necklace');
 
     // Extract purity from product, default to 22K
     const purity = (currentProduct?.purity || '22K') as '18K' | '21K' | '22K' | '24K';

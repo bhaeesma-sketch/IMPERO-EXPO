@@ -7,13 +7,13 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.imperodigold.app"
+    namespace "com.imperodigolds.app"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.imperodigold.app"
+        applicationId "com.imperodigolds.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 4
         versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {

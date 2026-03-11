@@ -90,7 +90,7 @@ export default function TermsPage() {
                     <h2 className="text-2xl font-serif mb-4">9. Contact Us</h2>
                     <p className="text-gray-600 dark:text-gray-300">
                         If you have any questions about these Terms and Conditions, please contact us at:<br />
-                        <strong>admin@impero-id.com</strong>
+                        <strong>contactbhaees@gmail.com</strong>
                     </p>
                 </section>
             </main>

@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.imperodigold.app',
+  appId: 'com.imperodigolds.app',
   appName: 'Impero Di Golds & Diamonds',
   webDir: 'dist',
   server: {

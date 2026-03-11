@@ -1,5 +1,5 @@
 {
-	"appId": "com.imperodigold.app",
+	"appId": "com.imperodigolds.app",
 	"appName": "Impero Di Golds & Diamonds",
 	"webDir": "dist",
 	"server": {
@@ -28,5 +28,7 @@
 			"backgroundColor": "#000000"
 		}
 	},
-	"packageClassList": []
+	"packageClassList": [
+		"CAPCameraPlugin"
+	]
 }

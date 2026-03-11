@@ -283,7 +283,7 @@ export default function Home() {
             </Reveal>
             <Reveal direction="left" delay={0.2}>
               <Link href="/catalog?category=coins">
-                <Button variant="link" className="group text-gray-900 hover:text-primary p-0 text-lg font-serif italic">
+                <Button variant="outline" className="group">
                   View All Coins <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
@@ -323,7 +323,7 @@ export default function Home() {
             </Reveal>
             <Reveal direction="left" delay={0.2}>
               <Link href="/catalog?category=bars">
-                <Button variant="link" className="group text-gray-900 hover:text-primary p-0 text-lg font-serif italic">
+                <Button variant="outline" className="group">
                   View All Bars <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
@@ -363,7 +363,7 @@ export default function Home() {
             </Reveal>
             <Reveal direction="left" delay={0.2}>
               <Link href="/catalog?category=silver">
-                <Button variant="link" className="group text-gray-900 hover:text-primary p-0 text-lg font-serif italic">
+                <Button variant="outline" className="group text-white border-white/20 hover:bg-white/10">
                   View All Silver <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
@@ -701,7 +701,7 @@ export default function Home() {
                   </li>
                   <li>
                     <span className="block font-medium text-gray-900 mb-1">Email</span>
-                    <a href="mailto:Admin@imperodigolduae.com" className="hover:text-primary">Admin@imperodigolduae.com</a>
+                    <a href="mailto:contactbhaees@gmail.com" className="hover:text-primary">contactbhaees@gmail.com</a>
                   </li>
                 </ul>
               </div>

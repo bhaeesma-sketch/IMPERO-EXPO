@@ -4,10 +4,10 @@
     "slug": "rest-express",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./attached_assets/impero_logo_transparent.png",
+    "icon": "./attached_assets/impero_app_icon_1024.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./attached_assets/impero_logo_transparent.png",
+      "image": "./attached_assets/impero_app_icon_1024.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -15,7 +15,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.imperodigold.app",
+      "bundleIdentifier": "com.imperodigolds.app",
       "supportsTablet": true,
       "buildNumber": "1",
       "infoPlist": {
@@ -23,7 +23,7 @@
       }
     },
     "android": {
-      "package": "com.imperodigold.app",
+      "package": "com.imperodigolds.app",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./attached_assets/impero_logo_transparent.png",

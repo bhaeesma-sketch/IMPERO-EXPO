@@ -1,4 +1,4 @@
-package com.imperodigold.app;
+package com.imperodigolds.app;
 
 import com.getcapacitor.BridgeActivity;
 

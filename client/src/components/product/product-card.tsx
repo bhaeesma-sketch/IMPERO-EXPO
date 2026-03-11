@@ -50,9 +50,9 @@ export function ProductCard({ id, name, image, purity, baseWeight, displayWeight
           {/* Shimmer overlay */}
           <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 pointer-events-none" />
 
-          {/* Quick Actions Overlay */}
-          <div className="absolute bottom-4 left-4 right-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex gap-2">
-            <Button className="w-full bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 shadow-sm text-xs h-9">
+          {/* Quick Actions Overlay - NOW PERMANENTLY VISIBLE */}
+          <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+            <Button className="w-full bg-black/80 backdrop-blur-sm text-white border border-transparent hover:bg-black shadow-lg text-xs h-9 transition-colors">
               View Details
             </Button>
           </div>
@@ -81,8 +81,8 @@ export function ProductCard({ id, name, image, purity, baseWeight, displayWeight
                     setWeight(w);
                   }}
                   className={`text-xs px-2 py-1 rounded border transition-colors ${weight === w
-                      ? 'bg-gray-900 text-white border-gray-900'
-                      : 'bg-white text-gray-600 border-gray-200 hover:border-primary'
+                    ? 'bg-gray-900 text-white border-gray-900'
+                    : 'bg-white text-gray-600 border-gray-200 hover:border-primary'
                     }`}
                 >
                   {w}g

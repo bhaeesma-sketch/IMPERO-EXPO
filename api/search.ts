@@ -162,8 +162,8 @@ router.get('/products/:productId/reviews', async (req, res) => {
     const avgRating =
       reviews.length > 0
         ? (
-            reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-          ).toFixed(1)
+          reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+        ).toFixed(1)
         : 0;
 
     const ratingDistribution = {
@@ -207,12 +207,8 @@ router.post('/products/:productId/reviews', async (req: any, res) => {
     if (!db) return res.status(500).json({ error: 'Database unavailable' });
 
     // Check if user has purchased this product (verified purchase)
-    const purchase = await db
-      .select()
-      .from(orderItems)
-      .where(eq(orderItems.productId, req.params.productId));
-
-    const verifiedPurchase = purchase.length > 0;
+    // Since orderItems doesn't exist in schema, default to false or implement later.
+    const verifiedPurchase = false;
 
     // Create review
     const newReview = await db
@@ -287,12 +283,6 @@ router.get('/user/recommendations', async (req: any, res) => {
   try {
     if (!req.session?.userId || !db) return res.json([]);
 
-    // Get user's cart items
-    const userCart = await db
-      .select()
-      .from(cartItems)
-      .where(eq(cartItems.userId, req.session.userId));
-
     // Get user's viewed products from search queries
     const userSearches = await db
       .select()
@@ -303,7 +293,7 @@ router.get('/user/recommendations', async (req: any, res) => {
       .map((s) => s.clickedProductId)
       .filter(Boolean);
 
-    const cartProductIds = userCart.map((c) => c.productId);
+    const cartProductIds: number[] = []; // cartItems not in schema yet
 
     // Find common characteristics
     let recommendedProducts = await db.select().from(products);

@@ -54,7 +54,7 @@ export default function PrivacyPolicy() {
                     <h2 className="text-2xl font-serif mb-4">4. Contact Us</h2>
                     <p className="text-gray-600 dark:text-gray-300">
                         If you have any questions about this Privacy Policy, please contact us at:<br />
-                        <strong>admin@impero-id.com</strong>
+                        <strong>contactbhaees@gmail.com</strong>
                     </p>
                 </section>
             </main>

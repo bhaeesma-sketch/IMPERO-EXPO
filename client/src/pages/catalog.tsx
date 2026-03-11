@@ -84,7 +84,9 @@ export default function CatalogPage() {
     const filteredProducts = useMemo(() => {
         let products = activeCategory === 'all'
             ? allProducts
-            : allProducts.filter(p => p.category === activeCategory);
+            : activeCategory === 'bullion'
+                ? allProducts.filter(p => p.type === 'bullion')
+                : allProducts.filter(p => p.category === activeCategory);
 
         if (searchQuery.trim()) {
             const q = searchQuery.toLowerCase().trim();
@@ -173,14 +175,13 @@ export default function CatalogPage() {
                     <div className="space-y-2 mt-2">
                         {PURITY_OPTIONS.map(purity => (
                             <label key={purity} className="flex items-center gap-3 cursor-pointer group">
-                                <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all duration-200 ${
-                                    selectedPurities.includes(purity)
+                                <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all duration-200 ${selectedPurities.includes(purity)
                                         ? 'bg-primary border-primary'
                                         : 'border-gray-300 group-hover:border-primary/50'
-                                }`}>
+                                    }`}>
                                     {selectedPurities.includes(purity) && (
                                         <svg className="w-3 h-3 text-white" viewBox="0 0 12 12" fill="none">
-                                            <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                            <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     )}
                                 </div>
@@ -234,14 +235,13 @@ export default function CatalogPage() {
                     <div className="space-y-2 mt-2">
                         {AVAILABILITY_OPTIONS.map(status => (
                             <label key={status} className="flex items-center gap-3 cursor-pointer group">
-                                <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all duration-200 ${
-                                    selectedAvailability.includes(status)
+                                <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all duration-200 ${selectedAvailability.includes(status)
                                         ? 'bg-primary border-primary'
                                         : 'border-gray-300 group-hover:border-primary/50'
-                                }`}>
+                                    }`}>
                                     {selectedAvailability.includes(status) && (
                                         <svg className="w-3 h-3 text-white" viewBox="0 0 12 12" fill="none">
-                                            <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                            <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     )}
                                 </div>

@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { Camera } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
 
 export function useCamera() {
     const [stream, setStream] = useState<MediaStream | null>(null);
@@ -11,6 +13,13 @@ export function useCamera() {
         setError(null);
 
         try {
+            if (Capacitor.isNativePlatform()) {
+                const permissionState = await Camera.requestPermissions();
+                if (permissionState.camera !== 'granted') {
+                    throw new Error('Camera permission denied.');
+                }
+            }
+
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
             }

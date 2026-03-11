@@ -1,7 +1,14 @@
 node_modules/
 .git/
-android/
-ios/
+# android/
+# ios/
+android/build/
+android/app/build/
+ios/Pods/
+ios/build/
+# mobile/
+*.apk
+*.aab
 dist/
 build/
 .config/
