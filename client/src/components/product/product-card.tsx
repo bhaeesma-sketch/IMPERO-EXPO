@@ -3,6 +3,16 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { MetalType } from '@/lib/gold-price';
+import { Box } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Product3DViewer } from './Product3DViewer';
+import { Product } from '@/lib/products';
 
 interface ProductCardProps {
   id: string;
@@ -51,10 +61,34 @@ export function ProductCard({ id, name, image, purity, baseWeight, displayWeight
           <div className="absolute inset-0 shimmer opacity-0 group-hover:opacity-100 pointer-events-none" />
 
           {/* Quick Actions Overlay - NOW PERMANENTLY VISIBLE */}
-          <div className="absolute bottom-4 left-4 right-4 flex gap-2">
-            <Button className="w-full bg-black/80 backdrop-blur-sm text-white border border-transparent hover:bg-black shadow-lg text-xs h-9 transition-colors">
+          <div className="absolute bottom-4 left-4 right-4 flex gap-2 z-20">
+            <Button className="flex-1 bg-black/80 backdrop-blur-sm text-white border border-transparent hover:bg-black shadow-lg text-[10px] h-8 transition-colors">
               View Details
             </Button>
+            {type === 'jewelry' && (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-10 h-8 p-0 bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white hover:text-black transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                  >
+                    <Box className="w-4 h-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[500px] bg-black border-white/10 p-0 overflow-hidden">
+                  <DialogHeader className="p-6 pb-0">
+                    <DialogTitle className="text-white font-serif">{name}</DialogTitle>
+                  </DialogHeader>
+                  <div className="p-4">
+                    <Product3DViewer product={{ id, name, image, purity, baseWeight, makingCharge, type } as Product} />
+                  </div>
+                </DialogContent>
+              </Dialog>
+            )}
           </div>
         </div>
 

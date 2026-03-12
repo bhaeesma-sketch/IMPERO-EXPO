@@ -22,6 +22,8 @@ import WishlistPage from "@/pages/wishlist";
 import EMICalculator from "@/pages/emi-calculator";
 import { useAnalytics } from "@/hooks/use-analytics";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { DynamicTheme } from "@/components/ui/dynamic-theme";
+import { AIStylistBot } from "@/components/ai/AIStylistBot";
 import { AnimatePresence, motion } from "framer-motion";
 
 function AnimatedRoutes() {
@@ -70,12 +72,14 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <WishlistProvider>
-          <TooltipProvider>
-            <ScrollProgress />
-            <AnalyticsTracker />
-            <AnimatedRoutes />
-            <Toaster />
-          </TooltipProvider>
+            <TooltipProvider>
+              <ScrollProgress />
+              <DynamicTheme />
+              <AIStylistBot />
+              <AnalyticsTracker />
+              <AnimatedRoutes />
+              <Toaster />
+            </TooltipProvider>
           </WishlistProvider>
         </AuthProvider>
       </QueryClientProvider>

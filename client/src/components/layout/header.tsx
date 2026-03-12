@@ -133,7 +133,7 @@ export function Header() {
       </AnimatePresence>
 
       <header
-        className={`w-full transition-all duration-300 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 ${isScrolled ? 'py-4 shadow-md' : 'py-8'
+        className={`w-full transition-all duration-300 z-[100] header-glass bg-white/90 backdrop-blur-md border-b border-gray-100 ${isScrolled ? 'py-4 shadow-md' : 'py-8'
           }`}
       >
         <div className="container mx-auto px-4 relative">
@@ -176,7 +176,7 @@ export function Header() {
                   <img
                     src={logoImg}
                     alt="Impero Di Gold Logo"
-                    className="h-full w-auto object-contain drop-shadow-2xl animate-bling"
+                    className="h-full w-auto object-contain drop-shadow-2xl animate-bling logo-glow"
                   />
                 </div>
               </div>

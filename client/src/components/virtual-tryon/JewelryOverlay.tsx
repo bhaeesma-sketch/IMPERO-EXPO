@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, Ring as ThreeRing } from '@react-three/drei';
 import * as THREE from 'three';
@@ -12,6 +12,7 @@ import { RealisticRing } from './jewelry-models/RealisticRing';
 import { RealisticBracelet } from './jewelry-models/RealisticBracelet';
 import { RealisticNoseRing } from './jewelry-models/RealisticNoseRing';
 import { LightingSystem } from './effects/LightingSystem';
+import { SparkleEffect } from './effects/SparkleEffect';
 
 interface JewelryOverlayProps {
     faceResults: Results | null;
@@ -32,6 +33,21 @@ export function JewelryOverlay({
     purity = '22K',
     earringStyle = 'stud'
 }: JewelryOverlayProps) {
+    const [isTracking, setIsTracking] = useState(false);
+    const prevTrackingRef = useRef(false);
+
+    const hasFaceLandmarks = faceResults?.multiFaceLandmarks && faceResults.multiFaceLandmarks.length > 0;
+    const hasHandLandmarks = handResults?.multiHandLandmarks && handResults.multiHandLandmarks.length > 0;
+    const currentlyTracking = (productType === 'necklace' || productType === 'earrings' || productType === 'nose_ring') ? !!hasFaceLandmarks : !!hasHandLandmarks;
+
+    useEffect(() => {
+        if (currentlyTracking && !prevTrackingRef.current) {
+            setIsTracking(true);
+            setTimeout(() => setIsTracking(false), 500);
+        }
+        prevTrackingRef.current = currentlyTracking;
+    }, [currentlyTracking]);
+
     // Face tracking logic
     const renderFaceJewelry = () => {
         if (!faceResults || !faceResults.multiFaceLandmarks || faceResults.multiFaceLandmarks.length === 0) {
@@ -194,6 +210,8 @@ export function JewelryOverlay({
         >
             {/* Enhanced lighting system */}
             <LightingSystem intensity={1.2} preset="studio" />
+
+            <SparkleEffect active={isTracking} />
 
             {/* Render jewelry based on type */}
             {(productType === 'necklace' || productType === 'earrings') && renderFaceJewelry()}

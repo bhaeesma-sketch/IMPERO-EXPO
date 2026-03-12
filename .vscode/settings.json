@@ -1,5 +1,8 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.jdt.ls.java.home": "/usr/local/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Contents/Home",
-    "java.home": "/usr/local/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Contents/Home"
+    "css.lint.unknownAtRules": "ignore",
+    "files.associations": {
+        "*.css": "tailwindcss"
+    }
 }
