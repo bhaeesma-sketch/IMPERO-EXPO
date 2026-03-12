@@ -133,21 +133,21 @@ export function Header() {
       </AnimatePresence>
 
       <header
-        className={`w-full transition-all duration-300 z-[100] header-glass bg-white/90 backdrop-blur-md border-b border-gray-100 ${isScrolled ? 'py-4 shadow-md' : 'py-8'
+        className={`w-full transition-all duration-300 z-[100] header-glass bg-background/80 backdrop-blur-lg border-b border-border/50 sticky top-0 ${isScrolled ? 'py-3 shadow-xl' : 'py-6'
           }`}
       >
         <div className="container mx-auto px-4 relative">
-          <div className="flex items-center justify-between h-20 md:h-28">
+          <div className="flex items-center justify-between h-16 md:h-24">
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 hover:bg-gray-50 rounded-full transition-colors z-50"
+              className="md:hidden p-2 hover:bg-white/5 rounded-full transition-colors z-50 text-foreground"
               onClick={() => setIsMobileMenuOpen(true)}
             >
-              <Menu className="w-6 h-6 text-gray-700" />
+              <Menu className="w-6 h-6" />
             </button>
 
-            {/* Desktop Navigation - LEFT SIDE - ADDDED PADDING */}
-            <nav className="hidden lg:flex items-center gap-6 text-sm font-medium tracking-wide flex-1 justify-start pr-40">
+            {/* Desktop Navigation - LEFT SIDE */}
+            <nav className="hidden lg:flex items-center gap-8 text-[13px] font-medium tracking-[0.15em] uppercase flex-1 justify-start pr-32">
               {[
                 { name: 'Catalog', href: '/catalog' },
                 { name: 'Bespoke', href: '/bespoke' },
@@ -158,43 +158,35 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="relative py-2 text-gray-600 hover:text-primary transition-colors group"
+                  className="relative py-2 text-foreground/70 hover:text-primary transition-all duration-300 group"
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full" />
                 </Link>
               ))}
             </nav>
 
-            {/* Logo - ABSOLUTE CENTER & MASSIVE & BLING */}
+            {/* Logo - ABSOLUTE CENTER */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none">
               <div
                 onClick={() => setTapCount(prev => prev + 1)}
                 className="block group pointer-events-auto cursor-pointer"
               >
-                <div className="h-24 md:h-40 w-auto relative flex items-center justify-center transition-all duration-500 hover:scale-105">
+                <div className="h-16 md:h-28 w-auto relative flex items-center justify-center transition-all duration-700 group-hover:scale-110">
                   <img
                     src={logoImg}
                     alt="Impero Di Gold Logo"
-                    className="h-full w-auto object-contain drop-shadow-2xl animate-bling logo-glow"
+                    className="h-full w-auto object-contain logo-glow drop-shadow-[0_0_20px_rgba(197,160,89,0.3)]"
                   />
+                  {/* Subtle radial glow behind logo */}
+                  <div className="absolute inset-0 bg-primary/10 blur-[40px] rounded-full -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
               </div>
             </div>
 
-            {/* Vault Unlock Modal */}
-            <VaultUnlock
-              isOpen={isVaultOpen}
-              onClose={() => setIsVaultOpen(false)}
-              onUnlock={() => {
-                setIsVaultOpen(false);
-                setLocation('/admin');
-              }}
-            />
-
             {/* Actions - RIGHT SIDE */}
-            <div className="flex items-center gap-4 flex-1 justify-end">
-              <nav className="hidden lg:flex items-center gap-6 text-sm font-medium tracking-wide mr-6 pl-40">
+            <div className="flex items-center gap-3 flex-1 justify-end">
+              <nav className="hidden lg:flex items-center gap-8 text-[13px] font-medium tracking-[0.15em] uppercase mr-4 pl-32">
                 {[
                   { name: 'Live Rates', href: '/#rates' },
                   { name: 'About Us', href: '/about' },
@@ -202,80 +194,83 @@ export function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="relative py-2 text-gray-600 hover:text-primary transition-colors group"
+                    className="relative py-2 text-foreground/70 hover:text-primary transition-all duration-300 group"
                   >
                     {item.name}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full" />
                   </Link>
                 ))}
               </nav>
 
-              <button
-                onClick={toggleTheme}
-                className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full transition-all text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary"
-                aria-label="Toggle dark mode"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="w-5 h-5 transition-transform hover:rotate-12" />
-                ) : (
-                  <Moon className="w-5 h-5 transition-transform hover:-rotate-12" />
-                )}
-              </button>
-
-              <Link href="/wishlist">
-                <button className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-full transition-colors text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary relative">
-                  <Heart className="w-5 h-5" />
-                  {wishlistCount > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center">{wishlistCount}</span>
+              <div className="flex items-center gap-1.5 border-l border-border/30 pl-4 ml-2">
+                <button
+                  onClick={toggleTheme}
+                  className="p-2.5 hover:bg-white/5 rounded-full transition-all text-foreground/70 hover:text-primary"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? (
+                    <Sun className="w-[18px] h-[18px]" />
+                  ) : (
+                    <Moon className="w-[18px] h-[18px]" />
                   )}
                 </button>
-              </Link>
 
-              <NotificationBell />
+                <Link href="/wishlist">
+                  <button className="p-2.5 hover:bg-white/5 rounded-full transition-colors text-foreground/70 hover:text-primary relative group">
+                    <Heart className="w-[18px] h-[18px] group-hover:fill-primary group-hover:text-primary transition-all" />
+                    {wishlistCount > 0 && (
+                      <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-primary-foreground text-[9px] font-bold rounded-full flex items-center justify-center border-2 border-background">
+                        {wishlistCount}
+                      </span>
+                    )}
+                  </button>
+                </Link>
 
-              {user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="p-2 hover:bg-gray-50 rounded-full transition-colors text-gray-600 hover:text-primary relative group">
-                      <User className="w-5 h-5" />
-                      {/* <span className="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full ring-2 ring-white"></span> */}
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56 bg-white z-[60]">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                      <User className="mr-2 h-4 w-4" />
-                      <span>{user.username || 'User'}</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => logout()} className="text-red-600 focus:text-red-600">
-                      <LogOut className="mr-2 h-4 w-4" />
-                      <span>Log out</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <div className="hidden md:flex items-center gap-4">
-                  <Button
-                    variant="ghost"
-                    className="font-serif hover:text-primary"
-                    onClick={() => setIsAuthModalOpen(true)}
-                  >
-                    Log in
-                  </Button>
-                  <Button
-                    className="bg-black text-white hover:bg-gray-800 font-serif"
-                    onClick={() => setIsAuthModalOpen(true)}
-                  >
-                    Sign Up
-                  </Button>
-                </div>
-              )}
+                <NotificationBell />
 
-              <a href="https://wa.me/971506485898?text=Hello%2C%20I%20am%20interested%20in%20your%20jewelry%20collection." target="_blank" rel="noopener noreferrer">
-                <Button className="hidden md:flex bg-primary hover:bg-primary/90 text-white font-serif tracking-wide gap-2">
-                  <Phone className="w-4 h-4" />
-                  Concierge
+                {user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className="p-2.5 hover:bg-white/5 rounded-full transition-colors text-foreground/70 hover:text-primary relative group">
+                        <User className="w-[18px] h-[18px]" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-56 bg-background/95 backdrop-blur-xl border-border z-[100] text-foreground">
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator className="bg-border/50" />
+                      <DropdownMenuItem className="focus:bg-primary/10">
+                        <User className="mr-2 h-4 w-4" />
+                        <span className="truncate">{user.username || 'User'}</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => logout()} className="text-red-500 focus:text-red-500 focus:bg-red-500/10 cursor-pointer">
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Log out</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <div className="hidden lg:flex items-center gap-3">
+                    <Button
+                      variant="ghost"
+                      className="text-[12px] uppercase tracking-widest hover:text-primary font-medium px-4"
+                      onClick={() => setIsAuthModalOpen(true)}
+                    >
+                      Login
+                    </Button>
+                    <Button
+                      className="bg-primary hover:bg-primary/90 text-white text-[12px] uppercase tracking-widest font-bold px-5 h-10 shadow-lg shadow-primary/20"
+                      onClick={() => setIsAuthModalOpen(true)}
+                    >
+                      Join
+                    </Button>
+                  </div>
+                )}
+              </div>
+
+              <a href="https://wa.me/971506485898" target="_blank" rel="noopener noreferrer" className="hidden xl:block">
+                <Button className="bg-emerald-600 hover:bg-emerald-700 text-white text-[12px] uppercase tracking-widest font-bold px-6 h-10 rounded-full shadow-lg shadow-emerald-900/10 ml-2">
+                  <Phone className="w-3.5 h-3.5 mr-2" />
+                  Whatapp
                 </Button>
               </a>
             </div>
@@ -307,18 +302,18 @@ export function Header() {
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 className="fixed top-0 left-0 bottom-0 w-[80%] max-w-sm bg-white z-50 md:hidden shadow-2xl flex flex-col"
               >
-                <div className="p-6 flex items-center justify-between border-b border-gray-100">
-                  <span className="font-serif text-xl font-bold">Menu</span>
-                  <button onClick={() => setIsMobileMenuOpen(false)}>
-                    <X className="w-6 h-6 text-gray-500" />
+                <div className="p-6 flex items-center justify-between border-b border-border/50 bg-background/95 backdrop-blur-xl">
+                  <span className="font-serif text-xl font-bold text-foreground">Menu</span>
+                  <button onClick={() => setIsMobileMenuOpen(false)} className="text-foreground/70 hover:text-primary">
+                    <X className="w-6 h-6" />
                   </button>
                 </div>
-                <div className="flex-1 overflow-y-auto py-4">
+                <div className="flex-1 overflow-y-auto py-4 bg-background/95 backdrop-blur-xl">
                   <nav className="flex flex-col">
                     {user && (
-                      <div className="px-6 py-4 bg-gray-50 mb-4 mx-4 rounded-lg">
-                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Welcome back</p>
-                        <p className="font-bold text-gray-900">{user.username}</p>
+                      <div className="px-6 py-4 bg-primary/10 mb-4 mx-4 rounded-lg border border-primary/20">
+                        <p className="text-[10px] text-primary uppercase tracking-[0.2em] mb-1 font-bold">Welcome back</p>
+                        <p className="font-serif text-lg text-foreground truncate">{user.username}</p>
                       </div>
                     )}
 
@@ -337,7 +332,7 @@ export function Header() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="px-6 py-4 text-lg font-medium text-gray-800 border-b border-gray-50 hover:bg-gray-50 hover:text-primary transition-colors"
+                        className="px-6 py-4 text-[15px] font-medium text-foreground/80 border-b border-border/20 hover:bg-primary/5 hover:text-primary transition-all duration-300 uppercase tracking-[0.1em]"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {item.name}
@@ -345,28 +340,27 @@ export function Header() {
                     ))}
 
                     {!user ? (
-                      <a
-                        href="#"
-                        onClick={(e) => { e.preventDefault(); setLocation('/auth'); setIsMobileMenuOpen(false); }}
-                        className="px-6 py-4 text-lg font-medium text-primary border-b border-gray-50 hover:bg-gray-50 transition-colors"
+                      <button
+                        onClick={() => { setLocation('/auth'); setIsMobileMenuOpen(false); }}
+                        className="px-6 py-4 text-[15px] font-bold text-primary border-b border-border/20 hover:bg-primary/5 transition-all text-left uppercase tracking-[0.1em]"
                       >
-                        Login / Register
-                      </a>
+                        Login / Sign Up
+                      </button>
                     ) : (
                       <button
                         onClick={() => { logout(); setIsMobileMenuOpen(false); }}
-                        className="px-6 py-4 text-lg font-medium text-red-600 text-left hover:bg-gray-50 transition-colors"
+                        className="px-6 py-4 text-[15px] font-bold text-red-500 text-left hover:bg-red-500/5 transition-all uppercase tracking-[0.1em]"
                       >
                         Sign Out
                       </button>
                     )}
                   </nav>
                 </div>
-                <div className="p-6 bg-gray-50">
-                  <a href="https://wa.me/971506485898?text=Hello%2C%20I%20am%20interested%20in%20your%20jewelry%20collection." target="_blank" rel="noopener noreferrer">
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white font-serif gap-2">
+                <div className="p-6 bg-background/95 backdrop-blur-xl border-t border-border/50">
+                  <a href="https://wa.me/971506485898" target="_blank" rel="noopener noreferrer">
+                    <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-serif gap-2 rounded-full h-12 shadow-lg shadow-emerald-900/20">
                       <Phone className="w-4 h-4" />
-                      Request Callback
+                      Request Concierge
                     </Button>
                   </a>
                 </div>

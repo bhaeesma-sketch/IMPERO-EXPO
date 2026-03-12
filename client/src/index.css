@@ -38,66 +38,52 @@
 
 /* DYNAMIC THEMES - REFINED LUXURY */
 .theme-golden-hour {
-  --primary: 40 43% 48%;
-  /* Celestial Gold */
-  --background: 48 40% 97%;
-  /* Silk Cream */
-  --foreground: 240 3% 10%;
-  --accent: 40 43% 48%;
-  --ring: 40 43% 48%;
+  --primary: 40 50% 55%; /* Rich, warm gold */
+  --background: 48 30% 98%; /* Warm silk cream */
+  --foreground: 240 5% 5%;
+  --accent: 40 50% 50%;
+  --ring: 40 50% 55%;
 }
 
 .theme-midnight {
-  --background: 240 5% 4%;
-  /* Deep Obsidian */
-  --foreground: 210 20% 98%;
-  --card: 240 5% 6%;
-  --card-foreground: 210 20% 98%;
-  --popover: 240 5% 4%;
-  --popover-foreground: 210 20% 98%;
-  --primary: 40 43% 58%;
-  /* Brighter Gold for contrast */
-  --primary-foreground: 240 5% 5%;
-  --secondary: 240 5% 10%;
-  --secondary-foreground: 210 20% 90%;
-  --muted: 240 5% 12%;
-  --muted-foreground: 240 5% 60%;
-  --accent: 40 43% 40%;
-  --accent-foreground: 210 20% 98%;
-  --border: 240 5% 15%;
-  --input: 240 5% 15%;
-  --ring: 40 43% 58%;
+  --background: 240 10% 3%; /* Pure obsidian */
+  --foreground: 40 15% 95%; /* Soft ivory text */
+  --card: 240 10% 5%;
+  --card-foreground: 40 15% 95%;
+  --popover: 240 10% 4%;
+  --popover-foreground: 40 15% 95%;
+  --primary: 40 60% 65%; /* Bright celestial gold */
+  --primary-foreground: 240 10% 4%;
+  --secondary: 240 10% 7%;
+  --secondary-foreground: 40 15% 90%;
+  --muted: 240 10% 10%;
+  --muted-foreground: 240 5% 50%;
+  --accent: 40 60% 45%;
+  --border: 240 10% 12%;
+  --input: 240 10% 12%;
+  --ring: 40 60% 65%;
 }
 
 /* Ensure Logo and Header elements adapt to dynamic themes */
+.header-glass {
+  background-color: hsla(var(--background), 0.8) !important;
+  border-bottom: 1px solid hsla(var(--primary), 0.1) !important;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+}
+
 .theme-midnight .header-glass {
-  background-color: rgba(10, 10, 11, 0.8) !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgba(5, 5, 7, 0.85) !important;
+  border-color: rgba(197, 160, 89, 0.2) !important;
+  box-shadow: 0 15px 50px -15px rgba(0,0,0,0.6);
+}
+
+.logo-glow {
+  filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.2));
+  transition: filter 0.5s ease;
 }
 
 .theme-midnight .logo-glow {
-  filter: brightness(1.2) drop-shadow(0 0 15px rgba(175, 139, 69, 0.4));
-}
-
-/* Global Midnight Overrides */
-.theme-midnight .bg-white,
-.theme-midnight .bg-background {
-  background-color: hsl(var(--background)) !important;
-}
-
-.theme-midnight .text-gray-900,
-.theme-midnight .text-foreground {
-  color: hsl(var(--foreground)) !important;
-}
-
-.theme-midnight .bg-gray-50,
-.theme-midnight .bg-secondary {
-  background-color: hsl(var(--secondary)) !important;
-}
-
-.theme-midnight .border-gray-100,
-.theme-midnight .border-border {
-  border-color: hsl(var(--border)) !important;
+  filter: brightness(1.1) drop-shadow(0 0 25px rgba(197, 160, 89, 0.5));
 }
 
 :root {
